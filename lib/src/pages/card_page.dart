@@ -7,13 +7,15 @@ class CardPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Cards 📮'),
       ),
-      body: ListView(
-        padding: EdgeInsets.all(10.0),
-        children: [
-          _cardTipo01(),
-          SizedBox(height: 5.0),
-          _cardTipo02(),
-        ],
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.all(10.0),
+          children: [
+            _cardTipo01(),
+            SizedBox(height: 5.0),
+            _cardTipo02(),
+          ],
+        ),
       ),
     );
   }

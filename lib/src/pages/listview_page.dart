@@ -44,8 +44,10 @@ class _ListaPageState extends State<ListaPage> {
         appBar: AppBar(
           title: Text('Listados 🧰'),
         ),
-        body: Stack(
-          children: [_crearLista(context), _crearLoading()],
+        body: SafeArea(
+          child: Stack(
+            children: [_crearLista(context), _crearLoading()],
+          ),
         ),
       ),
     );
