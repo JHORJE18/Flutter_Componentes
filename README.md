@@ -12,3 +12,7 @@ Listado de componentes usados para este proyecto.
 - Cards
 - Images
 - FadeInImage
+- CircleAvatar
+- Container
+- AnimatedContainer
+- TextField
