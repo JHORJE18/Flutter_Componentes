@@ -8,7 +8,23 @@ class ListaPage extends StatefulWidget {
 }
 
 class _ListaPageState extends State<ListaPage> {
-  List<int> _listadoNumeros = [100, 200, 300, 400, 500];
+  List<int> _listadoNumeros = new List();
+  int _ultimoItem = 0;
+  ScrollController _scrollController = new ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _agregarImagenes();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _agregarImagenes();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +40,7 @@ class _ListaPageState extends State<ListaPage> {
 
   Widget _crearLista(BuildContext context) {
     return ListView.builder(
+      controller: _scrollController,
       itemCount: _listadoNumeros.length,
       itemBuilder: (context, index) {
         final numeroImagen = _listadoNumeros[index];
@@ -33,5 +50,14 @@ class _ListaPageState extends State<ListaPage> {
                 NetworkImage('https://picsum.photos/id/$numeroImagen/500/300'));
       },
     );
+  }
+
+  _agregarImagenes() {
+    for (var i = 1; i < 10; i++) {
+      _ultimoItem++;
+      _listadoNumeros.add(_ultimoItem);
+    }
+
+    setState(() {});
   }
 }

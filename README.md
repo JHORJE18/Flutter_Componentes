@@ -23,3 +23,5 @@ Listado de componentes usados para este proyecto.
 - Sliders
 - Cehckboxs
 - Switchs
+- ListViewBuilder
+- InfiniteScroll
