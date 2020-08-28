@@ -25,3 +25,6 @@ Listado de componentes usados para este proyecto.
 - Switchs
 - ListViewBuilder
 - InfiniteScroll
+- Stack
+- CircularProgressIndicator
+- RefreshIndicator
