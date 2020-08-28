@@ -68,6 +68,7 @@ class AlertPage extends StatelessWidget {
   void _mostrarCupertinoAlert(BuildContext context) {
     showCupertinoDialog(
       context: context,
+      barrierDismissible: true,
       builder: (context) {
         return CupertinoAlertDialog(
           title: Text('Titulo de la alerta'),

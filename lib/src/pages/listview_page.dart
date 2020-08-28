@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class ListaPage extends StatefulWidget {
@@ -12,6 +14,8 @@ class _ListaPageState extends State<ListaPage> {
   int _ultimoItem = 0;
   ScrollController _scrollController = new ScrollController();
 
+  bool _isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -21,9 +25,16 @@ class _ListaPageState extends State<ListaPage> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        _agregarImagenes();
+        _fetchData();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _scrollController.dispose();
   }
 
   @override
@@ -33,7 +44,9 @@ class _ListaPageState extends State<ListaPage> {
         appBar: AppBar(
           title: Text('Listados 🧰'),
         ),
-        body: _crearLista(context),
+        body: Stack(
+          children: [_crearLista(context), _crearLoading()],
+        ),
       ),
     );
   }
@@ -45,11 +58,33 @@ class _ListaPageState extends State<ListaPage> {
       itemBuilder: (context, index) {
         final numeroImagen = _listadoNumeros[index];
         return FadeInImage(
-            placeholder: AssetImage('assets/jar-loading.gif'),
-            image:
-                NetworkImage('https://picsum.photos/id/$numeroImagen/500/300'));
+          placeholder: AssetImage('assets/jar-loading.gif'),
+          image: NetworkImage('https://picsum.photos/id/$numeroImagen/500/300'),
+          height: 300,
+          fit: BoxFit.fitHeight,
+        );
       },
     );
+  }
+
+  Widget _crearLoading() {
+    if (_isLoading) {
+      return Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [CircularProgressIndicator()],
+          ),
+          SizedBox(
+            height: 25,
+          )
+        ],
+      );
+    } else {
+      return Container();
+    }
   }
 
   _agregarImagenes() {
@@ -59,5 +94,21 @@ class _ListaPageState extends State<ListaPage> {
     }
 
     setState(() {});
+  }
+
+  Future<Null> _fetchData() async {
+    _isLoading = true;
+    setState(() {});
+
+    return new Timer(Duration(seconds: 2), _respuestaHttp);
+  }
+
+  void _respuestaHttp() {
+    _isLoading = false;
+
+    _scrollController.animateTo(_scrollController.position.pixels + 100,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.fastLinearToSlowEaseIn);
+    _agregarImagenes();
   }
 }
