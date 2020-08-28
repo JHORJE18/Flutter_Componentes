@@ -22,3 +22,4 @@ Listado de componentes usados para este proyecto.
 - DropdownMenuList
 - Sliders
 - Cehckboxs
+- Switchs
