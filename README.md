@@ -20,3 +20,5 @@ Listado de componentes usados para este proyecto.
 - TextEditingController
 - DropdownButton
 - DropdownMenuList
+- Sliders
+- Cehckboxs
