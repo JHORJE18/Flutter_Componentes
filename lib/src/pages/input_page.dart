@@ -121,7 +121,8 @@ class _InputPageState extends State<InputPage> {
         context: context,
         initialDate: new DateTime.now(),
         firstDate: new DateTime(1950),
-        lastDate: new DateTime.now());
+        lastDate: new DateTime.now(),
+        locale: Locale('es'));
 
     if (picked != null) {
       _fecha = picked.toString();

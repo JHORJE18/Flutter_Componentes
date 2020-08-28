@@ -16,3 +16,6 @@ Listado de componentes usados para este proyecto.
 - Container
 - AnimatedContainer
 - TextField
+- DatePicker
+- TextEditingController
+- 
